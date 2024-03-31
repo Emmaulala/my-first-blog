@@ -15,8 +15,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path, re_path #必須要用re_path才能使用reex
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-]
+    re_path(r'^admin/', admin.site.urls),
+    re_path(r'', include('blog.urls'))  #這行是我加的，為了把blog資料夾中的urls導入到這邊的主url裡
+] 
+'''
+注意上面的blog.urls要在blog資料夾中建一個相符的urls檔名的.py檔
+不能用path要用re_path才能用regex包含所有url符合上面1.2行指定的規則(不然會有"Django tried these URL patterns, in this order:
+login/
+admin/
+The empty path didn’t match any of these."的bug)
+'''
