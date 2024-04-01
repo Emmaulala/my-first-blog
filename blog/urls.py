@@ -4,5 +4,6 @@ from . import views
 
 urlpatterns=[
     #path(r'^$', views.post_list, name='post_list'), #原本path寫法用regex會有warning，應該是混用新舊版本django寫法
-    re_path(r'^$', views.post_list, name='post_list') #要用re_path寫法搭配regex才行
+    re_path(r'^$', views.post_list, name='post_list'), #要用re_path寫法搭配regex才行
+    re_path(r'^psot/(?P<pk>[0-9]+)/$', views.post_detail, name='post_detail'),
 ]  
