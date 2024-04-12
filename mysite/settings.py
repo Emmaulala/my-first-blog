@@ -74,13 +74,26 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+
+DATABASES = {
+    'default': { #這邊把Django預設資料庫(sqlite3)改成PostgreSQL的資料庫，依照Django 5.0資料庫連接的寫法
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'djangoproject', #改成自己的資料庫名稱
+        'USER': 'postgres', #這邊要改成自己的postgresSQL user名稱
+        'PASSWORD': 'emmaulala17', #安裝PostgresSQL時的密碼
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+
+'''這是Django框架預設資料庫
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
+'''
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -123,3 +136,7 @@ STATIC_ROOT=BASE_DIR/'static'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL='/' #我加上的，成功登入後導向主頁
+LOGOUT_REDIRECT_URL = '/'#我加上的，logout後重新導向主頁，因為我的主頁網址後面沒有加東西(只有http://127.0.0.1:8000，所以寫'/')
+

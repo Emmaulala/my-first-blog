@@ -11,7 +11,16 @@
     <body>
         <div class="page-header">
             {% if user.is_authenticated %}
-            <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+                <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+                <a href="{% url 'post_draft_list' %}" class="top-menu"><span class="glyphicon glyphicon-edit"></span></a>
+                <p class="top-menu">Hello {{ user.username }} 
+                    <form action="{% url 'logout' %}" method="post"> <!--這邊form這四行以及內部button是我加上去的，作為logout button-->
+                        {% csrf_token %} <!--因django5已不再支持GET方法logout-->
+                        <button type="submit">Log Out</button> <!--參照此篇文章解說https://learndjango.com/tutorials/django-login-and-logout-tutorial-->
+                    </form></p>
+            {% else %}
+                <p>You are logged out</p>
+                <a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
             {% endif %}
             <h1><a href="/">Emma's blog</a></h1>
         </div>
